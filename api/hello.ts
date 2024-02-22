@@ -5,7 +5,8 @@ export const config = {
 export function GET(request: Request) {
   const stream = new ReadableStream({
     start(controller) {
-      controller.enqueue("Streaming, world!");
+      const encoder = new TextEncoder();
+      controller.enqueue(encoder.encode("Hello, World!"));
       controller.close();
     },
   });
