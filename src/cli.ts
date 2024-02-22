@@ -1,8 +1,12 @@
 import "dotenv/config";
 import { openai } from "./api.js";
 
-const originalContext =
-  "Using a fancy new library over using a more stable established library and discovering bugs";
+const originalContext = process.argv[2];
+
+if (!originalContext) {
+  console.error("Please provide a context");
+  process.exit(1);
+}
 
 // const result = await openai.chat.completions.create({
 //   model: "gpt-4-0125-preview",
@@ -30,9 +34,6 @@ const originalContext =
 // const demotivationalLabel = result.choices[0].message.content!;
 // console.log(demotivationalLabel);
 
-// const demotivationalLabel =
-//   "Innovation - Because stumbling through a forest of bugs in a fancy new library reminds us how smooth the old road was.";
-
 // const result2 = await openai.chat.completions.create({
 //   model: "gpt-4-0125-preview",
 //   max_tokens: 256,
@@ -54,8 +55,9 @@ const originalContext =
 
 // const imagePrompt = result2.choices[0].message.content!;
 // console.log(imagePrompt);
+
 const imagePrompt =
-  "A coder sitting lost amidst a dense, dark forest of oversized, glowing computer bugs, while in the distance, a smooth, paved road winds through a serene landscape, under a bright, clear sky.";
+  "An archaeologist looking disappointed as they unearth a crumbling ancient computer from a dig site, in a highly detailed digital art style";
 
 const result3 = await openai.images.generate({
   prompt: `I NEED to test how the tool works with extremely simple prompts. DO NOT add any detail, just use it AS-IS:\n\n${imagePrompt}`,
