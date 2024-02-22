@@ -1,3 +1,10 @@
 export function GET(request: Request) {
-  return new Response(`Hello from ${process.env.VERCEL_REGION}`);
+  const stream = new ReadableStream({
+    start(controller) {
+      controller.enqueue("Streaming, world!");
+      controller.close();
+    },
+  });
+
+  return new Response(stream);
 }
